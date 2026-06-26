@@ -1,5 +1,6 @@
 mod models;
 mod solver;
+use std::time::Instant;
 
 fn main() {
     let items = vec![
@@ -21,11 +22,26 @@ fn main() {
         models::Item { id: 16, weight: 13, value: 16 },
         models::Item { id: 17, weight: 11, value: 14 },
         models::Item { id: 18, weight: 8, value: 9 },
+        models::Item { id: 19, weight: 6, value: 8 },
+        models::Item { id: 20, weight: 4, value: 5 },
+        models::Item { id: 21, weight: 2, value: 4 },
+        models::Item { id: 22, weight: 7, value: 9 },
+        models::Item { id: 23, weight: 3, value: 6 },
+        models::Item { id: 24, weight: 5, value: 8 },
+        models::Item { id: 25, weight: 9, value: 10 },
     ];
 
     let capacity = 45;
+
+    // 計算時間の計測開始
+    let start_time = Instant::now();
+
     let (max_val, combination) = solver::solve_knapsack(&items, capacity);
+
+    let duration = start_time.elapsed();
+    // 計算時間の計測終了
 
     println!("最大価値: {}", max_val);
     println!("品目の組み合わせ: {:?}", combination);
+    println!("計算時間: {:?}", duration);
 }
