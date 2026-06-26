@@ -33,15 +33,15 @@ fn main() {
 
     let capacity = 45;
 
-    // 計算時間の計測開始
-    let start_time = Instant::now();
+    // 総当たり法の計測
+    print!("総当たり法の場合\n");
+    let start = Instant::now();
+    let (val1, _) = solver::solve_knapsack(&items, capacity);
+    println!("総当たり法: {:?}, 時間: {:?}\n", val1, start.elapsed());
 
-    let (max_val, combination) = solver::solve_knapsack(&items, capacity);
-
-    let duration = start_time.elapsed();
-    // 計算時間の計測終了
-
-    println!("最大価値: {}", max_val);
-    println!("品目の組み合わせ: {:?}", combination);
-    println!("計算時間: {:?}", duration);
+    // DPの計測
+    print!("動的計画法の場合\n");
+    let start = Instant::now();
+    let (val2, _) = solver::solve_knapsack_dp(&items, capacity as usize);
+    println!("動的計画法: {:?}, 時間: {:?}\n", val2, start.elapsed());
 }
